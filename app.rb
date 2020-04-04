@@ -29,7 +29,11 @@ post '/callback' do
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
-        client.reply_message(event['replyToken'], '画像は未対応なり')
+        message = {
+          type: 'text',
+          text: '画像はまだ未対応なり'
+        }
+        client.reply_message(event['replyToken'], message)
       end
     end
   end
