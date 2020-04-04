@@ -39,7 +39,3 @@ post '/callback' do
   # Don't forget to return a successful response
   "OK"
 end
-
-get '/' do
-    "Hello world"
-end
