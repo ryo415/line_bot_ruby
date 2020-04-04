@@ -29,9 +29,7 @@ post '/callback' do
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
-        response = client.get_message_content(event.message['id'])
-        tf = Tempfile.open("content")
-        tf.write(response.body)
+        client.reply_message(event['replyToken'], '画像は未対応なり'
       end
     end
   end
