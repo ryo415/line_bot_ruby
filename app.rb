@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'line/bot'
 
-=begin
 def client
   @client ||= Line::Bot::Client.new { |config|
     config.channel_id = ENV["LINE_CHANNEL_ID"]
@@ -40,7 +39,6 @@ post '/callback' do
   # Don't forget to return a successful response
   "OK"
 end
-=end
 
 get '/' do
     "Hello world"
