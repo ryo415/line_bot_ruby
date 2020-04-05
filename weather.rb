@@ -12,10 +12,9 @@ class Weather
               else
                 {}
               end
-    temp_max = weather['temperture']['max']['celsius'] || '不明'
-    temp_min = weather['temperture']['min']['celsius'] || '不明'
-
-    message = "#{weather['datelabel']}の東京の天気: #{weather['telop']}\n最高気温: #{temp_max}度\n最低気温: #{temp_min}"
+    temp_max = weather['temperature']['max'].nil? ? '不明' : weather['temperature']['max']['celsius']
+    temp_min = weather['temperature']['min'].nil? ? '不明' : weather['temperature']['min']['celsius']
+    message = "#{weather['dateLabel']}の東京の天気: #{weather['telop']}\n最高気温: #{temp_max}度\n最低気温: #{temp_min}度"
   end
 
   def today
