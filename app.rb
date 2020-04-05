@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'line/bot'
+require './weather'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -23,15 +24,24 @@ post '/callback' do
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
+        if event.message['text'] == '今日の天気'
+          weather = Weather.new()
+          message_text = weather.message('today')
+        elsif event.message['text'] == '明日の天気'
+          weather = Weather.new()
+          message_text = weather.message('tomorrow')
+        else
+          message_text = event.message['text']
+        end
         message = {
           type: 'text',
-          text: event.message['text']
+          text: message_text
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
         message = {
           type: 'text',
-          text: '画像はまだ未対応なり'
+          text: '画像,動画はまだ未対応なり'
         }
         client.reply_message(event['replyToken'], message)
       end
