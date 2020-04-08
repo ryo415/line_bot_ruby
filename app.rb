@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'line/bot'
 require './weather'
+require './fortune_telling'
 
 def client
   @client ||= Line::Bot::Client.new { |config|
@@ -30,6 +31,9 @@ post '/callback' do
         elsif event.message['text'] == '明日の天気'
           weather = Weather.new()
           message_text = weather.message('tomorrow')
+        elsif FortuneTelling.fortune?(event.message['text'])
+          fortune_telling = FortuneTelling.new()
+          message_text = FortuneTelling.message(event.message['text'])
         else
           message_text = event.message['text']
         end
