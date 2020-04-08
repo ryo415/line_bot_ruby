@@ -33,7 +33,7 @@ post '/callback' do
           message_text = weather.message('tomorrow')
         elsif FortuneTelling.fortune?(event.message['text'])
           fortune_telling = FortuneTelling.new()
-          message_text = FortuneTelling.message(event.message['text'])
+          message_text = fortune_telling.message(event.message['text'])
         else
           message_text = event.message['text']
         end
